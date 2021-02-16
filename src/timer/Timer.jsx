@@ -49,10 +49,9 @@ function Timer(){
         setSec(0);
         setMin(0);
         setHour(0);
-        setTime(printTime());
         clearTimeout(timer.current);
         setIsStarted(false);
-
+        setTime("00 : 00 : 00");
         console.log(printTime());
     }
     // useEffect(()=>{
