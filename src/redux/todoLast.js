@@ -76,5 +76,6 @@ export default function todo(state=initialState, action){
             })
             
             default:
+                return state;
     }
 }
