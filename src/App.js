@@ -5,13 +5,13 @@
 // import Count from './counter/Count';
 // import counter from './redux/counter';
 // import Todo2 from './todo2/Todo2';
-import Counter from './Counter';
+import Weather from './weatherReduxSaga/Weather';
 
 function App() {
 
   return (
     <div className="App">
-        <Counter />
+        <Weather />
     </div>
   );
 }

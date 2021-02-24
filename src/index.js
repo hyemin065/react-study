@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import counter2 from  './redux/counter2';
+import Weather from  './redux/weather';
 import createSagaMiddleware from 'redux-saga';
 import rootsaga from './redux/root';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(counter2, applyMiddleware(sagaMiddleware));
+const store = createStore(Weather, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootsaga);
 
