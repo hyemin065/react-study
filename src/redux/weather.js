@@ -10,27 +10,34 @@ export const weatherAction = (data) => ({
     type:WEATHER,    
     data
 })
-export const weatherData = () => ({
-    type:WEATHER_DATA   
+export const weatherData = (lat,lon) => ({
+    type:WEATHER_DATA,
+    lat,
+    lon   
 })
 
-async function api(){
-    const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=37.540108200000006&lon=126.6417671&appid=162e461eec9f4717a6f4c16182a714f3&units=metric`);
+
+
+async function api(lat, lon){
+    const data = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=162e461eec9f4717a6f4c16182a714f3&units=metric`);
     return data;
 }
 
 //api 받아오기
-function* getWeather(){
+function* getWeather({lat, lon}){
+    console.log(lat, lon)
     try{
-        const data = yield call(api);
-        yield put(weatherAction(data))
+        const {data} = yield call(() => api(lat,lon));
+        if(data){
+            yield put(weatherAction(data))
+        }
     }catch(error){
         console.log(error)
     }
 }
 
 
-export function* weatherAPI(){
+export function* weatherAPI(action){
     yield takeEvery(WEATHER_DATA, getWeather);
 }
 

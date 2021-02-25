@@ -40,7 +40,12 @@ function Weather(){
     // } 
 
     const abc = () =>{
-        dispatch(weatherData());
+        navigator.geolocation.getCurrentPosition(position => {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            dispatch(weatherData(lat, lon));
+
+        })
     }
 
     useEffect(()=>{
@@ -48,19 +53,22 @@ function Weather(){
         
         abc();
     },[])
+    if(data){
+        const {data: result} = data;
+        return(
+            <>
+                <div>
+                
+                    <div>{result.weather[0].main}</div>
+                    <div>{Math.round(result.main.temp)}</div>
+                </div>
+            </>
+        );
+    }
 
-
+return null;
  
-    return(
-        <>
-            <div>{data ? (
-                <>
-                    <div>{data.data.main.temp}</div>
-                    <div>{data.data.weather[0].main}</div>
-                </>
-            ) : null}</div>
-        </>
-    );
+    
 
 }
 
